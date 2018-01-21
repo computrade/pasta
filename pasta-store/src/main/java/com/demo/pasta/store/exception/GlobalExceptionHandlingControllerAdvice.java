@@ -26,7 +26,24 @@ public class GlobalExceptionHandlingControllerAdvice {
 	public void notFound() {
 		logger.error("Request raised a PastaNotFoundExceptionClass");
 	}
-
 	
+	/**
+	 * Convert a predefined exception to an HTTP Status code
+	 */
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST , reason = "Some parameters are missing in the request. Check your request.")
+	@ExceptionHandler(BadRequestException.class)
+	public void badRequest() {
+		logger.error("Request raised a BadRequestException");
+	}
+	
+	/**
+	 * Convert a predefined exception to an HTTP Status code
+	 */
+	@ResponseStatus(value = HttpStatus.NOT_FOUND , reason = "The recipe was not found in the food2fork api.")
+	@ExceptionHandler(RecipeNotFoundException.class)
+	public void recipeNotFound() {
+		logger.error("The recipe was not found in the food2fork api");
+	}
+
 
 }

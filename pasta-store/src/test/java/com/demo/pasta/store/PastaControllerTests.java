@@ -15,18 +15,18 @@
  */
 package com.demo.pasta.store;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -40,7 +40,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PastaControllerTests {
 
-	private ObjectMapper mapper = new ObjectMapper();
+	
+	@Autowired
+	protected  ObjectMapper mapper;
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -67,11 +69,47 @@ public class PastaControllerTests {
 
 	}
 
+	@Test
+	public void testRestOfOrderPasta() throws Exception {
+		
+		this.mockMvc.perform(post("/order")
+				    .contentType(MediaType.APPLICATION_JSON_VALUE)
+				    .content("{\"pasta\":\"Farfalle\",\"sauces\":[\"Alfredo\"]}")
+				    .accept(MediaType.APPLICATION_JSON)).
+		             andDo(print()).andExpect(status().is2xxSuccessful());
+
+	}
+	
+	
+	@Test
+	public void testRestOfOrderPastaWithListOfSauces() throws Exception {
+		
+		this.mockMvc.perform(post("/order")
+				    .contentType(MediaType.APPLICATION_JSON_VALUE)
+				    .content("{\"pasta\":\"Spaghetti\",\"sauces\":[\"Pesto\",\"Tomato\"]}")
+				    .accept(MediaType.APPLICATION_JSON)).
+		             andDo(print()).andExpect(status().is2xxSuccessful());
+
+	}
+	
+	@Test
+	public void testRestOfOrderPastaNotFound() throws Exception {
+		
+		this.mockMvc.perform(post("/order")
+				    .contentType(MediaType.APPLICATION_JSON_VALUE)
+				    .content("{\"pasta\":\"Stam\",\"sauces\":[\"Alfredo\"]}")
+				    .accept(MediaType.APPLICATION_JSON)).
+		             andDo(print()).andExpect(status().isNotFound());
+
+	}
+
+
+
 	private void validatePastaResponsePrice(PastaResponse pastaResponse, double expectedPrice) {
 
-		assertNotNull(pastaResponse);
-		assertEquals(expectedPrice, pastaResponse.getPasta().getPrice(), 0.0);
-		assertTrue(pastaResponse.getId() > 0);
+		Assert.assertNotNull(pastaResponse);
+		Assert.assertEquals(expectedPrice, pastaResponse.getPasta().getPrice(), 0.0);
+		Assert.assertTrue(pastaResponse.getId() > 0);
 	}
 
 }

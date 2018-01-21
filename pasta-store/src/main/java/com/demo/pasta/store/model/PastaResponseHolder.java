@@ -8,6 +8,11 @@ public class PastaResponseHolder {
 	long id;
 	List<String> pastas = new ArrayList<String>();
 	
+	public PastaResponseHolder() {
+		super();
+
+	}
+	
 	public PastaResponseHolder(long id, List<String> pastas) {
 		super();
 		this.id = id;

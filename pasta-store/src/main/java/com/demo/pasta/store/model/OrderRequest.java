@@ -3,28 +3,26 @@ package com.demo.pasta.store.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SauceResponse {
-	
-	long id;
+public class OrderRequest {
+
+	String pasta;
 	List<String> sauces = new ArrayList<String>();
 	
-	public SauceResponse() {
+	public OrderRequest() {
 		super();
-
 	}
 	
-	
-	public SauceResponse(long id, List<String> sauces) {
+	public OrderRequest(String pasta, List<String> sauces) {
 		super();
-		this.id = id;
+		this.pasta = pasta;
 		this.sauces = sauces;
 	}
 	
-	public long getId() {
-		return id;
+	public String getPasta() {
+		return pasta;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setPasta(String pasta) {
+		this.pasta = pasta;
 	}
 	public List<String> getSauces() {
 		return sauces;
@@ -32,11 +30,16 @@ public class SauceResponse {
 	public void setSauces(List<String> sauces) {
 		this.sauces = sauces;
 	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("SauceResponse [id=").append(id).append(", sauces=").append(sauces).append("]");
+		builder.append("OrderRequest [pasta=").append(pasta).append(", sauces=").append(sauces).append("]");
 		return builder.toString();
 	}
+	
+	
+	
+	
 	
 }
