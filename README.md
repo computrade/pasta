@@ -1,12 +1,20 @@
 # Pasta Demo
 
-**Business logic:**
+**Application description:**
 
-Gil wants to create a website to advertise his fresh hand-made pasta store.
+1. Gil wants to create a website to advertise his fresh hand-made pasta store.
 He would like the site to have a menu (list of the types of pasta you can buy in his store), and
 also an option to see the details of each type of pasta.
 
-There are two methods to calculate the weight:
+2. Application support also order a pasta with integration to food2fork.com
+
+**Architecture**
+
+Implementation is devided to the following layers:
+1. Service Layer (`package com.demo.pasta.store`)
+2. Business Logic Layer. (`package com.demo.pasta.store.business`)
+3. Data layer. (`package com.demo.pasta.store.data`)
+4. External Services Layer. (`package com.demo.pasta.store.food2fork`)
 
 **The following technologies were used in this implementation:**
 1. Java 8
@@ -40,6 +48,9 @@ Solution is production ready from the following perspective:
   
   **Monitoring:**
   Spring Actuator was added for monitoring see example below.
+  
+  **Dependency Injection**
+  Spring capabilities were used to inject @Bean such as `BusinessLogic, DataLayer, RecipeApi`
  
  **Rest Services Sample:**
  
@@ -63,7 +74,43 @@ An endpoint that receives a type of pasta and returns the details about it
 
  Sample json result:
  `{"id":3,"pasta":{"name":"Spaghetti","sauces":["Tomato","Cream cheese","Pesto"],"howtocook":["Default"],"price":15.99}}`
+ 
+ An endpoint to order pasta
 
+ `curl -H "Content-Type: application/json" -X POST  -d '{"pasta":"Spaghetti","sauces":["Pesto","Tomato"]}' http://localhost:8080/order`
+
+ Sample json result:
+ ```
+ {
+    "id": 1,
+    "price": 22.97,
+    "cook": [
+        "Default"
+    ],
+    "image": "http://static.food2fork.com/535_1_1349687284_lrg8974.jpg",
+    "ingredients": [
+        "6 heaped tablespoons fresh pesto",
+        "1.5 litres organic chicken, ham or vegetable stock",
+        "1 bulb fennel",
+        "100 g fine asparagus",
+        "2  Romanesco cauliflowers, or 1 large cauliflower",
+        "6  baby courgettes",
+        "6  plum tomatoes",
+        "  extra virgin olive oil",
+        "2 cloves garlic, finely sliced",
+        "1 bunch spring onions, finely chopped",
+        "100 g green beans, finely sliced",
+        "100 g yellow beans, finely sliced",
+        "100 g peas, podded",
+        "100 g broad beans, podded",
+        "100 g spaghetti, broken-up",
+        "  sea salt",
+        "  freshly ground black pepper",
+        "1 small handful fresh green or purple basil",
+        "1 small handful fresh chives"
+    ]
+}
+```
 Monitoring end points were added with spring Actuator.
 ```
 http://localhost:8080/health
