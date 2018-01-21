@@ -116,5 +116,5 @@ Monitoring end points were added with spring Actuator.
 http://localhost:8080/health
 http://localhost:8080/metrics
 ```
-See more here: `https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html`
+See more here: https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html
 
