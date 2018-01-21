@@ -35,7 +35,7 @@ public class OrderController {
 	}
 	
 	
-	private OrderResponse buildOrderResponse(long incrementAndGet, OrderRequest orderRequest) {
+	private OrderResponse buildOrderResponse(long requestId, OrderRequest orderRequest) {
 		
 		OrderResponse oderResponse = new OrderResponse();
 		String pasta = orderRequest.getPasta();
@@ -44,6 +44,7 @@ public class OrderController {
 		PastaUtils.validateStringIsNotNullOrEmpty(pasta);
 		PastaUtils.validateListIsNotNullOrEmpty(sauces);
 		
+		oderResponse.setId(requestId);
 		List<String> howToCook = businessLogic.getHowToCook(pasta);
 		oderResponse.setCook(howToCook);
 		Double totalPrice = businessLogic.calculateTotalOrderPrice(pasta, sauces);
