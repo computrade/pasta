@@ -8,7 +8,7 @@ also an option to see the details of each type of pasta.
 
 2. Application support also order a pasta with integration to food2fork.com
 
-**Architecture**
+**Architecture:**
 
 Implementation is devided to the following layers:
 1. Service Layer (`package com.demo.pasta.store`)
