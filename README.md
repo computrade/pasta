@@ -47,29 +47,27 @@ Solution is production ready from the following perspective:
  
   `curl -X GET http://localhost:8080/pasta`
  
-  Sample json result:  {"id":1,"pastas":["Spaghetti","Farfalle","Lasagna","Fettuccine"]}
+  Sample json result:  
+  `{"id":1,"pastas":["Spaghetti","Farfalle","Lasagna","Fettuccine"]}`
 
 An endpoint that returns the list of all sauces types sold in the store
 
   `curl -X GET http://localhost:8080/sauce`
 
-  Sample json result {"id":2,"sauces":["Tomato","Cream cheese","Pesto","Alfredo","Bolognese"]}
+  Sample json result:
+  `{"id":2,"sauces":["Tomato","Cream cheese","Pesto","Alfredo","Bolognese"]}`
 
 An endpoint that receives a type of pasta and returns the details about it
 
  `curl -X GET http://localhost:8080/pasta/Spaghetti`
 
- Sample json result {"id":3,"pasta":{"name":"Spaghetti","sauces":["Tomato","Cream cheese","Pesto"],"howtocook":["Default"],"price":15.99}}
+ Sample json result:
+ `{"id":3,"pasta":{"name":"Spaghetti","sauces":["Tomato","Cream cheese","Pesto"],"howtocook":["Default"],"price":15.99}}`
 
 Monitoring end points were added with spring Actuator.
 ```
 http://localhost:8080/health
 http://localhost:8080/metrics
 ```
-see more here: `https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html`
+See more here: `https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html`
 
-
-
-
-2. 
-3. 
