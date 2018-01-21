@@ -75,7 +75,7 @@ An endpoint that receives a type of pasta and returns the details about it
  Sample json result:
  `{"id":3,"pasta":{"name":"Spaghetti","sauces":["Tomato","Cream cheese","Pesto"],"howtocook":["Default"],"price":15.99}}`
  
- An endpoint to order pasta
+ An endpoint to order pasta ( with integratin to http://food2fork.com api )
 
  `curl -H "Content-Type: application/json" -X POST  -d '{"pasta":"Spaghetti","sauces":["Pesto","Tomato"]}' http://localhost:8080/order`
 
